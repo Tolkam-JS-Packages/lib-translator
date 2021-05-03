@@ -41,7 +41,7 @@ class Translator {
      *
      * @param provider
      */
-    public addProvider(provider: ILanguageProvider): this {
+    public addProvider = (provider: ILanguageProvider): this => {
         this.providers.push(provider);
         return this;
     }
@@ -51,7 +51,7 @@ class Translator {
      *
      * @param languageCode
      */
-    public useLanguage(languageCode: string): this {
+    public useLanguage = (languageCode: string): this => {
         if(languageCode.length !== 2) {
             throw new Error(`Language code must be exactly 2 characters long`);
         }
@@ -66,7 +66,7 @@ class Translator {
      * @param messageCode
      * @param params
      */
-    public get(messageCode: string, params?: IMessageParams): string | null {
+    public get = (messageCode: string, params?: IMessageParams): string | null => {
         const lang = this.language;
         let message = this.o.fallbackToCode ? messageCode : null;
 
@@ -82,6 +82,8 @@ class Translator {
                     break;
                 }
             }
+        } else {
+            throw new Error(`No language to use is set`);
         }
 
         return message;
@@ -100,8 +102,8 @@ class Translator {
             }
         });
 
-        if(!capable.length) {
-            throw new Error(`No capable provider found for ${languageCode} language`);
+        if(capable.length === 0) {
+            throw new Error(`No capable provider found for "${languageCode}" language`);
         }
 
         return capable;

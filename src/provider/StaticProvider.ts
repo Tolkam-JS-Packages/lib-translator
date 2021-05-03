@@ -1,4 +1,4 @@
-import { ILanguageProvider } from '../types';
+import { ILanguageProvider, ITranslatorOptions } from '../types';
 import { objectMerge, objectHasProperty } from '@tolkam/lib-utils';
 import Translator from '../Translator';
 
@@ -12,6 +12,20 @@ class StaticProvider implements ILanguageProvider {
     protected messages: {
         [languageCode: string]: IMessages
     } = {};
+
+    /**
+     * @type IOptions
+     */
+    protected o: IOptions = {
+        strict: false,
+    };
+
+    /**
+     * @param options
+     */
+    public constructor(options: IOptions = {}) {
+        this.o = {...this.o, ...options};
+    }
 
     /**
      * Adds messages
@@ -39,7 +53,6 @@ class StaticProvider implements ILanguageProvider {
      * @inheritDoc
      */
     public getMessage(languageCode: string, messageCode: string): string | null {
-
         let found = messageCode
             .split(Translator.pathSeparator)
             .reduce((message, k) => (
@@ -50,10 +63,21 @@ class StaticProvider implements ILanguageProvider {
 
         if(found != null && objectHasProperty(found, ROOT_KEY)) {
             found = found[ROOT_KEY];
+
+        }
+
+        if(found == null && this.o.strict) {
+            throw new Error(
+                `No translation found at "${messageCode}" path for "${languageCode}" language`
+            );
         }
 
         return found;
     }
+}
+
+interface IOptions {
+    strict?: boolean;
 }
 
 export interface IMessages {
