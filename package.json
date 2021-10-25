@@ -1,15 +1,12 @@
 {
     "name": "@tolkam/lib-translator",
-    "version": "1.0.0",
-    "description": "Translates message codes into human readable strings",
+    "description": "Translates message codes into human-readable strings",
     "main": "src/index.ts",
     "license": "UNLICENSED",
-    "private": true,
     "dependencies": {
-        "@tolkam/lib-utils": "file:D:/dev-packages/js/tolkam/lib-utils"
+        "@tolkam/lib-utils": "^0.2.0"
     },
     "devDependencies": {
-        "@types/locutus": "0.0.6",
-        "tslib": "^2"
+        "tslib": "^2.3.1"
     }
 }

@@ -1,5 +1,5 @@
-import { ILanguageProvider, ITranslatorOptions } from '../types';
 import { objectMerge, objectHasProperty } from '@tolkam/lib-utils';
+import { ILanguageProvider } from '../types';
 import Translator from '../Translator';
 
 const ROOT_KEY = '';
