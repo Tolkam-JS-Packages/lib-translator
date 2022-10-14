@@ -1,6 +1,7 @@
 {
     "name": "@tolkam/lib-translator",
     "description": "Translates message codes into human-readable strings",
+    "version": "0.0.0",
     "main": "src/index.ts",
     "license": "UNLICENSED",
     "dependencies": {
